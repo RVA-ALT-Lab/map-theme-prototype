@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="./style.css"></link>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row site-wrapper">
+            <div class="side-nav">
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-3x fa-home"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map"></i></a></li>
+                        <li><a href="#" id="openPoints"><i class="fa fa-3x fa-map-signs"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-plus"></i></a></li>
+                        <hr>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-info"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="point-list col-md-5">
+                <ul>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                        <h4>Point</h4>
+                        <p>Some text here</p>
+                        <a class="btn btn-primary">Point Stuff Here</a>
+                    </li>
+                    <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                        <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                        <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                        <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                        <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                        <li class="point-tile">
+                            <h4>Point</h4>
+                            <p>Some text here</p>
+                            <a class="btn btn-primary">Point Stuff Here</a>
+                        </li>
+                </ul>
+
+            </div>
+            <div class="main-post col-md-8">
+
+            </div>
+
+            <div class="map">
+                <div class="row map-ui-row">
+                    <div class="col-4"></div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" data-toggle="modal" data-target="#pointSubmitModal" class="btn btn-block btn-primary"><i class="fa fa-lg fa-plus"></i> Add Map Point</button>
+                                <button type="button" class="btn btn-block btn-secondary">Stop Geolocation</button>
+                                <button type="button" class="btn btn-block btn-success">Start Geolocation</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="map">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="pointSubmitModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Map Point</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Enter some details about the point you want to capture.</p>
+                  <form action="" method="POST">
+
+                  </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+ integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+ crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+</html>

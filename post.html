@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="./style.css"></link>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row site-wrapper">
+            <div class="side-nav">
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-3x fa-home"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map"></i></a></li>
+                        <li><a href="#" id="openPoints"><i class="fa fa-3x fa-map-signs"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-plus"></i></a></li>
+                        <hr>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-map-marker"></i></a></li>
+                        <li><a href="#"><i class="fa fa-3x fa-info"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main-post col-md-7">
+                <div class="row">
+                    <div class="col-lg-12 post-content">
+                        <h1>Title Content</h1>
+                        <h2>Author</h2>
+                        <p>Lorem ipsum dolor amet hot chicken cardigan unicorn four loko celiac, coloring book kale chips bitters knausgaard. Chicharrones copper mug four loko kombucha twee tattooed chillwave PBR&B subway tile try-hard messenger bag meggings. Waistcoat etsy iceland mustache. Pitchfork narwhal ugh biodiesel, iceland raclette actually hexagon tote bag prism skateboard four dollar toast air plant viral fingerstache. Aesthetic beard keffiyeh kogi jianbing photo booth food truck af tbh cardigan bicycle rights vexillologist deep v iPhone before they sold out. Pug try-hard cred, pinterest kogi art party fam tacos portland yuccie. Microdosing mixtape authentic jean shorts, locavore vaporware affogato bushwick vinyl ramps shabby chic readymade 8-bit succulents waistcoat.
+
+                                Dreamcatcher echo park iceland hexagon la croix, live-edge typewriter skateboard heirloom farm-to-table. Bushwick lo-fi hexagon, direct trade taiyaki butcher pitchfork authentic chia prism kogi tacos fingerstache slow-carb. Cornhole ugh celiac raclette, four dollar toast mlkshk pabst. Umami street art adaptogen vegan taxidermy. Flannel beard irony organic tbh la croix. Drinking vinegar cliche keytar chicharrones chartreuse 3 wolf moon hell of palo santo knausgaard YOLO venmo. Shoreditch raw denim gentrify, woke edison bulb squid kitsch selvage distillery lyft succulents.
+
+                                Kale chips chia hashtag air plant neutra health goth freegan typewriter photo booth disrupt ethical locavore. Hammock etsy blue bottle lomo helvetica. Plaid cray chia, small batch live-edge kickstarter raw denim typewriter portland XOXO brooklyn 3 wolf moon. Schlitz hexagon cardigan ugh, artisan pour-over try-hard gastropub microdosing ennui selfies.
+
+                                Helvetica intelligentsia asymmetrical, fanny pack pickled quinoa vinyl humblebrag farm-to-table. Hella aesthetic sustainable intelligentsia locavore lyft celiac lumbersexual taxidermy schlitz vegan roof party meh dreamcatcher meggings. Vape yr ugh health goth cold-pressed scenester gentrify. Palo santo PBR&B la croix pabst leggings cronut. Mumblecore pop-up fixie brooklyn direct trade viral, crucifix wayfarers mustache everyday carry.
+
+                                Ugh tousled taxidermy keytar retro synth photo booth meggings polaroid pok pok ramps organic pop-up whatever cred. Kinfolk kitsch heirloom crucifix lumbersexual vegan. 8-bit tofu art party, 90's snackwave VHS lyft edison bulb leggings artisan activated charcoal pickled ennui XOXO. Microdosing leggings keytar pop-up, viral kitsch +1 freegan polaroid pitchfork iceland stumptown la croix deep v.
+
+                                Vaporware kinfolk echo park, cold-pressed migas umami four dollar toast unicorn sartorial hoodie venmo tousled ennui flannel. Kale chips meggings jean shorts letterpress knausgaard pork belly. Raclette af 8-bit, cloud bread wolf pok pok intelligentsia. Leggings snackwave umami synth man braid tote bag echo park lumbersexual retro palo santo. Yr authentic banh mi franzen farm-to-table offal. Roof party leggings bicycle rights fingerstache pitchfork polaroid franzen put a bird on it taxidermy microdosing vegan raw denim poutine pok pok. Plaid pickled brunch banh mi, roof party subway tile normcore meh kombucha etsy ramps tilde.
+
+                                Pork belly PBR&B ennui fanny pack knausgaard master cleanse franzen raw denim brooklyn stumptown banjo. Photo booth single-origin coffee farm-to-table portland drinking vinegar ramps typewriter. Blue bottle synth health goth raw denim salvia. Tumblr snackwave subway tile austin pickled hashtag art party drinking vinegar. Fanny pack unicorn marfa affogato, keytar deep v synth.
+
+                                Palo santo lo-fi godard bushwick sartorial jianbing fingerstache readymade tote bag hammock. Etsy snackwave green juice kogi shabby chic meggings viral tote bag ramps. Echo park organic craft beer, DIY jean shorts scenester af subway tile cold-pressed single-origin coffee. Iceland kinfolk before they sold out keytar. Quinoa sartorial kinfolk church-key live-edge green juice put a bird on it ennui listicle bushwick wolf activated charcoal small batch keffiyeh. Actually knausgaard tattooed master cleanse cronut flannel. Keffiyeh you probably haven't heard of them church-key selvage forage adaptogen mumblecore, tofu venmo food truck mlkshk snackwave kombucha chia.
+
+                                Four loko cloud bread irony, cardigan chartreuse fashion axe crucifix schlitz intelligentsia gentrify viral skateboard celiac mixtape. Vegan iceland asymmetrical 90's tumeric distillery. Photo booth echo park fixie migas keffiyeh, adaptogen pour-over. Bespoke ugh hammock quinoa, adaptogen disrupt vape bicycle rights tattooed. Occupy pop-up mumblecore pickled lo-fi tote bag squid crucifix you probably haven't heard of them. Coloring book kinfolk biodiesel, fashion axe adaptogen enamel pin vape vexillologist. Leggings selfies hashtag letterpress hexagon paleo celiac tousled.
+
+                                Wolf meh chia jean shorts. Church-key VHS health goth butcher photo booth tote bag gochujang dreamcatcher thundercats four loko jianbing. Everyday carry shabby chic yr tumeric chicharrones, edison bulb jianbing. Affogato intelligentsia retro truffaut gochujang +1 man bun umami enamel pin direct trade.
+                                </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map fixed-right">
+                <div id="map">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="pointSubmitModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Map Point</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Enter some details about the point you want to capture.</p>
+                  <form action="" method="POST">
+
+                  </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+ integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+ crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+</html>
