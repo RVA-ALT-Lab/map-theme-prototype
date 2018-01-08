@@ -17,7 +17,8 @@ function create_taxonomy() {
                 'delete_terms' => 'list_users',
             ),
             'public' => true,
-            'show_in_rest' => true
+            'show_in_rest' => true,
+            'query_var' => true
             )
         );
 }
@@ -124,7 +125,7 @@ function map_tool_add_scripts () {
     }
 
     if ( is_tax()){
-        wp_register_script('cat_js', get_template_directory_uri() . '/js/map.js', null, null, true );
+        wp_register_script('cat_js', get_template_directory_uri() . '/js/category.js', null, null, true );
         wp_enqueue_script('cat_js');
     }
 
@@ -132,49 +133,4 @@ function map_tool_add_scripts () {
 
 add_action( 'wp_enqueue_scripts', 'map_tool_add_scripts' );
 
-// Process New Map Point
-
-if (isset($_POST['new_point_submitted']) && $_POST['new_point_submitted'] == 'true'){
-
-    $nonce = $_POST['map_point_nonce_field'];
-
-    if (
-        wp_verify_nonce( $nonce, 'submit_map_point')
-        && current_user_can('publish_posts')
-        ){
-            $point_title = $_POST['point_title'];
-            $point_description = $_POST['point_description'];
-            $point_category = $_POST['point_category'];
-            $point_latitude = $_POST['latitude'];
-            $point_longitude = $_POST['longitude'];
-
-
-            $postarr = array(
-                'post_title' => $point_title,
-                'post_exceprt' => $point_description,
-                'post_type' => 'map-point',
-                'post_status' => 'publish',
-                'meta_input' => array(
-                    'latitude' => $point_latitude,
-                    'longitude' => $point_longitude,
-                )
-            );
-
-            $post_id = wp_insert_post($postarr);
-
-            if ( isset($_FILES['point-image']) ){
-                require_once( ABSPATH . 'wp-admin/includes/image.php' );
-                require_once( ABSPATH . 'wp-admin/includes/file.php' );
-                require_once( ABSPATH . 'wp-admin/includes/media.php' );
-                $attachment_id = media_handle_upload('point-image', $post_id);
-                if (!is_wp_error($attachment_id)){
-                    set_post_thumbnail($post_id, $attachment_id);
-                }
-            }
-
-            wp_set_post_terms( $post_id, array($point_category), 'map-point-category');
-
-
-        }
-}
 ?>

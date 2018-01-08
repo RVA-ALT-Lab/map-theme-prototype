@@ -67,6 +67,11 @@ body, html {
     height: 100%;
     width: 100%;
     color:white;
+    text-decoration: none;
+}
+
+.side-nav nav ul li a:hover {
+    text-decoration: none;
 }
 
 .map,
@@ -151,16 +156,57 @@ body, html {
     right: 0;
     top: 0;
     left: auto;
-    width: 555px;
+    width: 525px;
 }
 
 .map.fixed-right #map {
     position: absolute;
-    width: 555px;
+    width: 525px;
 }
 
 /* Override for Modal */
 
 .modal {
     z-index: 10050;
+}
+
+/* Styles for Front Page */
+
+#front-page {
+    text-align: center;
+    color: white;
+}
+
+#front-page {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.75)
+      ),
+      url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/VCU_East_on_Broad_by_Jeff_Auth.jpg/1200px-VCU_East_on_Broad_by_Jeff_Auth.jpg);
+    background-size: cover;
+
+}
+
+#front-page h1 {
+    font-size: 5rem;
+}
+
+#front-page h2 {
+    font-size: 3.5rem;
+}
+
+#front-page p {
+    font-size: 2rem;
+}
+
+li a .fa-map-marker:first-of-type {
+    color: purple;
+}
+
+li a .fa-map-marker {
+    color: green;
+}
+
+li a .fa-map-marker {
+    color: blue;
 }

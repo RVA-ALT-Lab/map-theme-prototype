@@ -6,9 +6,16 @@ get_header(); ?>
             <div class="main-post col-md-7">
             <div class="row">
                 <div class="col-lg-12 post-content">
+                    <input type="hidden" class="post-id" value="<?php echo get_the_ID();?>">
                     <h1><?php the_title(); ?></h1>
                     <h2><?php the_author(); ?></h2>
                     <?php $content = get_the_content(); echo $content; ?>
+                    <?php
+						// If comments are open or we have at least one comment, load up the comment template.
+						if ( comments_open() || get_comments_number() ) :
+							comments_template();
+						endif;
+						?>
                 </div>
             </div>
         </div>

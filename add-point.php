@@ -4,6 +4,50 @@
 Template Name: Add Point
 **/
 
+if (isset($_POST['new_point_submitted']) && $_POST['new_point_submitted'] == 'true'){
+
+        $nonce = $_POST['map_point_nonce_field'];
+
+        if (
+            wp_verify_nonce( $nonce, 'submit_map_point')
+            && current_user_can('publish_posts')
+            ){
+                $point_title = $_POST['point_title'];
+                $point_description = $_POST['point_description'];
+                $point_category = array( (int)$_POST['point_category'] );
+                $point_latitude = $_POST['latitude'];
+                $point_longitude = $_POST['longitude'];
+
+
+                $postarr = array(
+                    'post_title' => $point_title,
+                    'post_exceprt' => $point_description,
+                    'post_type' => 'map-point',
+                    'post_status' => 'publish',
+                    'meta_input' => array(
+                        'latitude' => $point_latitude,
+                        'longitude' => $point_longitude,
+                    )
+                );
+
+                $post_id = wp_insert_post($postarr);
+
+                if ( isset($_FILES['point-image']) ){
+                    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+                    require_once( ABSPATH . 'wp-admin/includes/media.php' );
+                    $attachment_id = media_handle_upload('point-image', $post_id);
+                    if (!is_wp_error($attachment_id)){
+                        set_post_thumbnail($post_id, $attachment_id);
+                    }
+                }
+
+               wp_set_object_terms( $post_id, $point_category, 'map-point-category', true);
+
+
+            }
+    }
+
 get_header(); ?>
 
             <div class="map">

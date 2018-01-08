@@ -29,14 +29,14 @@
                         <li>
                             <a href="/points" id="openPoints">
                                 <i class="fa fa-3x fa-map-signs"></i>
+                                </br>Points
                             </a>
-                            </br>Points
                         </li>
                         <li>
                             <a href="/add-point">
                                 <i class="fa fa-3x fa-plus"></i>
+                                </br>Add
                             </a>
-                        </br>Add
                         </li>
                         <hr>
                         <?php $categories = get_terms(array('taxonomy' => 'map-point-category', 'hide_empty' => false)); ?>
@@ -47,7 +47,6 @@
                                 </br><?php echo $category->name; ?>
                             </a></li>
                             <? endforeach;?>
-                        <li><a href="#"><i class="fa fa-3x fa-info"></i></a></li>
                     </ul>
                 </nav>
             </div>

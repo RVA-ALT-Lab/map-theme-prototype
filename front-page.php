@@ -8,11 +8,16 @@ Template Name: Front Page
 
             <div class="front-page">
 
-                <div id="front-page" style="background-color: black;">
-                    <h1><?php bloginfo('name'); ?></h1>
-                    <h2>This is a cool map project</h2>
-                    <p>Maybe a quick description here.</p>
-                    <a href="/map">Link to Map</a>
+                <div id="front-page" style="">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1><?php bloginfo('name'); ?></h1>
+                            <h2>This is a cool map project</h2>
+                            <p>Maybe a quick description here.</p>
+                            <a class="btn btn-primary btn-lg" href="/map">Explore the Map</a>
+                            <p class="small">Image Credit to Jeff Auth from Wikipedia</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
