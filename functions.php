@@ -39,6 +39,7 @@ function create_posttype() {
                 'editor',
                 'thumbnail',
                 'comments',
+                'author',
                 'revisions',
                 'custom-fields'
             ),
@@ -101,6 +102,7 @@ function map_tool_add_scripts () {
     //Here we need to load some different scripts for different templates
     if ( !is_front_page() ){
         wp_register_script('theme_js', get_template_directory_uri() . '/js/app.js', null, null, true );
+        wp_localize_script('theme_js', 'WPURLS', array( 'siteurl' => get_option('siteurl') ));
         wp_enqueue_script('theme_js');
     }
 

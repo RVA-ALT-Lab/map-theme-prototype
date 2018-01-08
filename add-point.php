@@ -56,7 +56,7 @@ get_header(); ?>
                     <div class="col-6">
                         <div class="card">
                             <div class="card-body">
-                                <button type="button" data-toggle="modal" data-target="#pointSubmitModal" class="btn btn-block btn-primary"><i class="fa fa-lg fa-plus"></i> Add Map Point</button>
+                                <button type="button" data-toggle="modal" data-target="#pointSubmitModal" class="btn btn-block btn-primary"><i class="fa fa-lg fa-plus"></i> Add <span class="hidden-sm">Map</span> Point</button>
                                 <button type="button" class="btn btn-block btn-secondary stop-geolocation">Stop Geolocation</button>
                                 <button type="button" class="btn btn-block btn-success start-geolocation" style="display: none;">Start Geolocation</button>
                             </div>

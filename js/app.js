@@ -1,4 +1,6 @@
 var MapUtilityClass = function ($) {
+    var self = this;
+    this.siteURL = WPURLS.siteurl.replace('http', 'https');
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
         [-77.3858, 37.537],
@@ -45,7 +47,7 @@ var MapUtilityClass = function ($) {
 
     this.getMapPoints = function ( ) {
         return new Promise( (resolve, reject) => {
-            $.get('/wp-json/wp/v2/map-point?_embed&per_page=100')
+            $.get( self.siteURL + '/wp-json/wp/v2/map-point?_embed&per_page=100')
             .done(data => resolve(data))
             .fail(error => reject(error))
         })
@@ -53,7 +55,7 @@ var MapUtilityClass = function ($) {
 
     this.getMapPointsByCategory = function ( categoryID ) {
         return new Promise( (resolve, reject) => {
-            $.get('/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID)
+            $.get(self.siteURL + '/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID)
             .done(data => resolve(data))
             .fail(error => reject(error))
         })
@@ -61,7 +63,7 @@ var MapUtilityClass = function ($) {
 
     this.getMapPointsById = function ( postID ) {
         return new Promise( (resolve, reject) => {
-            $.get('/wp-json/wp/v2/map-point/'+ postID + '?_embed')
+            $.get( self.siteURL + '/wp-json/wp/v2/map-point/'+ postID + '?_embed')
             .done(data => resolve(data))
             .fail(error => reject(error))
         })
@@ -98,17 +100,22 @@ var MapUtilityClass = function ($) {
             var marker = L.marker([point.meta.latitude, point.meta.longitude], {
                 icon: icon
             }).addTo(map)
-            marker.bindPopup(point.title.rendered)
+
+            var markerContent = `
+            <h4>${point.title.rendered}</h4>
+            <img src='${point._embedded['wp:featuredmedia'][0].source_url}' height='200' width='200'>
+            <br>
+            <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+            `
+            marker.bindPopup(markerContent)
         })
     }
 
     this.addSingleMapMarker = function (data, map) {
 
                     // todo: add in check for catgegory to determine color
-
-                    var backgroundColor = data['map-point-category'][0] * 2
                     var markerHtmlStyles = `
-                    background-color: purple);
+                    background-color: purple;
                     width: 3rem;
                     height: 3rem;
                     display: block;
@@ -130,7 +137,13 @@ var MapUtilityClass = function ($) {
                     var marker = L.marker([data.meta.latitude, data.meta.longitude], {
                         icon: icon
                     }).addTo(map)
-                    marker.bindPopup(data.title.rendered)
+                    var markerContent = `
+                    <h4>${data.title.rendered}</h4>
+                    <img src='${data._embedded['wp:featuredmedia'][0].source_url}' height='200' width='200'>
+                    <br>
+                    <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
+                    `
+                    marker.bindPopup(markerContent)
             }
 
 }
