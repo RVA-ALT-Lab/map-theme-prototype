@@ -1,4 +1,4 @@
-#Map Tool Theme
+# Map Tool Theme
 
 This is a WordPress theme that uses leaflet.js and Mapbox to create a custom mapping application for use with students and faculty.
 
