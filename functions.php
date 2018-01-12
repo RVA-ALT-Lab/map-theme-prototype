@@ -135,4 +135,107 @@ function map_tool_add_scripts () {
 
 add_action( 'wp_enqueue_scripts', 'map_tool_add_scripts' );
 
+
+// Here we bootstrap all of the pages necessary to display the map tool elements
+// without any configuration
+// This should be /add-point, /map, /points
+// The root index / should automatically use <front-page class="php">
+// programmatically create some basic pages, and then set Home and Blog
+// setup a function to check if these pages exist
+function the_slug_exists($post_name) {
+	global $wpdb;
+	if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
+		return true;
+	} else {
+		return false;
+	}
+}
+// create the blog page
+if (isset($_GET['activated']) && is_admin()){
+    $map_page_title = 'Map';
+    $map_page_content = 'This is a placeholder for the map page. Nothin you put here will be shown.';
+    $map_page_check = get_page_by_title($map_page_title);
+    $map_page = array(
+	    'post_type' => 'page',
+	    'post_title' => $map_page_title,
+	    'post_content' => $map_page_content,
+	    'post_status' => 'publish',
+	    'post_author' => 1,
+	    'post_slug' => 'map'
+    );
+    if(!isset($map_page_check->ID) && !the_slug_exists('map')){
+        $map_page_id = wp_insert_post($map_page);
+        update_post_meta( $map_page_id, '_wp_page_template', 'map.php' );
+
+    }
+}
+// create the site map page
+if (isset($_GET['activated']) && is_admin()){
+    $points_page_title = 'Points';
+    $points_page_content = 'This is a placeholder for the map points page. Nothing you put here will be shown.';
+    $points_page_check = get_page_by_title($points_page_title);
+    $points_page = array(
+	    'post_type' => 'page',
+	    'post_title' => $points_page_title,
+	    'post_content' => $points_page_content,
+	    'post_status' => 'publish',
+	    'post_author' => 1,
+	    'post_slug' => 'points'
+    );
+    if(!isset($points_page_check->ID) && !the_slug_exists('points')){
+        $points_page_id = wp_insert_post($points_page);
+        update_post_meta( $points_page_id, '_wp_page_template', 'points.php' );
+    }
+}
+// change the Sample page to the home page
+if (isset($_GET['activated']) && is_admin()){
+    $add_point_page_title = 'Add Point';
+    $add_point_page_content = 'This is a placeholder for the add point page. Nothing you put here will be shown.';
+    $add_point_page_check = get_page_by_title($add_point_page_title);
+    $add_point_page = array(
+	    'post_type' => 'page',
+	    'post_title' => $add_point_page_title,
+	    'post_content' => $add_point_page_content,
+	    'post_status' => 'publish',
+	    'post_author' => 1,
+	    'post_slug' => 'add-point'
+    );
+    if(!isset($add_point_page_check->ID) && !the_slug_exists('add-point')){
+        $add_point_page_id = wp_insert_post($add_point_page);
+        update_post_meta( $add_point_page_id, '_wp_page_template', 'add-point.php' );
+    }
+}
+
+// change the Sample page to the home page
+if (isset($_GET['activated']) && is_admin()){
+    $home_page_title = 'Home';
+    $home_page_content = '';
+    $home_page_check = get_page_by_title($home_page_title);
+    $home_page = array(
+	    'post_type' => 'page',
+	    'post_title' => $home_page_title,
+	    'post_content' => $home_page_content,
+	    'post_status' => 'publish',
+	    'post_author' => 1,
+	    'ID' => 2,
+	    'post_slug' => 'home'
+    );
+    if(!isset($home_page_check->ID) && !the_slug_exists('home')){
+        $home_page_id = wp_insert_post($home_page);
+    }
+}
+
+
+
+if (isset($_GET['activated']) && is_admin()){
+	// Set the blog page
+	$blog = get_page_by_title( 'Blog' );
+	update_option( 'page_for_posts', $blog->ID );
+
+	// Use a static front page
+	$front_page = 2; // this is the default page created by WordPress
+	update_option( 'page_on_front', $front_page );
+	update_option( 'show_on_front', 'page' );
+}
+
 ?>
