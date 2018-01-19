@@ -15,25 +15,25 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="/map-test">
+                            <a href="<?php echo get_home_url();?>">
                             <i class="fa fa-3x fa-home"></i>
                             </br>Home
                             </a>
                         </li>
                         <li>
-                            <a href="/map-test/map">
+                            <a href="map">
                             <i class="fa fa-3x fa-map"></i>
                             </br>Map
                             </a>
                         </li>
                         <li>
-                            <a href="/map-test/points" id="openPoints">
+                            <a href="points" id="openPoints">
                                 <i class="fa fa-3x fa-map-signs"></i>
                                 </br>Points
                             </a>
                         </li>
                         <li>
-                            <a href="/map-test/add-point">
+                            <a href="add-point">
                                 <i class="fa fa-3x fa-plus"></i>
                                 </br>Add
                             </a>
@@ -41,12 +41,11 @@
                         <hr>
                         <?php $categories = get_terms(array('taxonomy' => 'map-point-category', 'hide_empty' => false)); ?>
                             <?php foreach($categories as $category): ?>
-                            <li class="category-menu-option">
-                                <a href="/map-test/map-point-category/<?php echo $category->slug; ?>">
-                                    <i class="fa fa-3x fa-map-marker"></i>
-                                    </br><?php echo $category->name; ?>
-                                </a>
-                            </li>
+                            <li>
+                                <a href="map-point-category/<?php echo $category->slug; ?>">
+                                <i class="fa fa-3x fa-map-marker"></i>
+                                </br><?php echo $category->name; ?>
+                            </a></li>
                             <?php endforeach;?>
                     </ul>
                 </nav>
