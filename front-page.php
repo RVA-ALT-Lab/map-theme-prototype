@@ -12,8 +12,8 @@ Template Name: Front Page
                     <div class="row">
                         <div class="col-lg-12">
                             <h1><?php bloginfo('name'); ?></h1>
-                            <p><?php  bloginfo('description');?>/p>
-                            <a class="btn btn-primary btn-lg" href="map">Explore the Map</a>
+                            <p><?php  bloginfo('description');?></p>
+                            <a class="btn btn-primary btn-lg" href="<?php echo get_site_url(). '/map'; ?>">Explore the Map</a>
                             <p class="small">Image Credit to Jeff Auth from Wikipedia</p>
                         </div>
                     </div>

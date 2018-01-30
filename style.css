@@ -217,3 +217,9 @@ li a .fa-map-marker {
 li a .fa-map-marker {
     color: blue;
 }
+
+/* Utility Styles */
+
+.small {
+    font-size: .75rem!important;
+}

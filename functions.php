@@ -150,7 +150,7 @@ function the_slug_exists($post_name) {
 		return false;
 	}
 }
-// create the blog page
+// create the map page
 if (isset($_GET['activated']) && is_admin()){
     $map_page_title = 'Map';
     $map_page_content = 'This is a placeholder for the map page. Nothin you put here will be shown.';
@@ -169,7 +169,7 @@ if (isset($_GET['activated']) && is_admin()){
 
     }
 }
-// create the site map page
+// create the points page
 if (isset($_GET['activated']) && is_admin()){
     $points_page_title = 'Points';
     $points_page_content = 'This is a placeholder for the map points page. Nothing you put here will be shown.';
@@ -187,7 +187,7 @@ if (isset($_GET['activated']) && is_admin()){
         update_post_meta( $points_page_id, '_wp_page_template', 'points.php' );
     }
 }
-// change the Sample page to the home page
+// create add point page
 if (isset($_GET['activated']) && is_admin()){
     $add_point_page_title = 'Add Point';
     $add_point_page_content = 'This is a placeholder for the add point page. Nothing you put here will be shown.';
@@ -225,8 +225,6 @@ if (isset($_GET['activated']) && is_admin()){
     }
 }
 
-
-
 if (isset($_GET['activated']) && is_admin()){
 	// Set the blog page
 	$blog = get_page_by_title( 'Blog' );
@@ -236,6 +234,78 @@ if (isset($_GET['activated']) && is_admin()){
 	$front_page = 2; // this is the default page created by WordPress
 	update_option( 'page_on_front', $front_page );
 	update_option( 'show_on_front', 'page' );
+}
+
+
+/***
+ *
+ * Start Theme Settings Stuff Here
+ *
+ ***/
+add_action('admin_menu', 'map_create_menu_page');
+
+function map_create_menu_page () {
+    add_submenu_page('themes.php', 'map-tool', 'Map Tool Settings', 'list_users', 'map-tool', 'create_map_settings_menu');
+}
+
+function create_map_settings_menu (){
+    require 'map-options-menu.php';
+}
+
+add_action('admin_init', 'map_create_settings');
+
+function map_create_settings (){
+
+    register_setting('map_general_options', 'map_general_options', 'map_validate_settings');
+    add_settings_section( 'text_section', 'General Options', 'map_display_section', 'map-tool' );
+    $field_args = array(
+        'type'      => 'text',
+        'id'        => 'pu_textbox',
+        'name'      => 'pu_textbox',
+        'desc'      => 'Example of textbox description',
+        'std'       => '',
+        'label_for' => 'pu_textbox',
+        'class'     => 'css_class'
+      );
+
+    add_settings_field( 'example_textbox', 'Example Textbox', 'map_display_setting', 'map-tool', 'text_section', $field_args );
+}
+
+function map_validate_settings($input)
+{
+  foreach($input as $k => $v)
+  {
+    $newinput[$k] = trim($v);
+
+    // Check the input is a letter or a number
+    if(!preg_match('/^[A-Z0-9 _]*$/i', $v)) {
+      $newinput[$k] = '';
+    }
+  }
+
+  return $newinput;
+}
+
+function map_display_section($section){
+
+    }
+
+function map_display_setting($args)
+{
+    extract( $args );
+
+    $option_name = 'map_general_options';
+
+    $options = get_option( $option_name );
+
+    switch ( $type ) {
+          case 'text':
+              $options[$id] = stripslashes($options[$id]);
+              $options[$id] = esc_attr( $options[$id]);
+              echo "<input class='regular-text$class' type='text' id='$id' name='" . $option_name . "[$id]' value='$options[$id]' />";
+              echo ($desc != '') ? "<br /><span class='description'>$desc</span>" : "";
+          break;
+    }
 }
 
 ?>
