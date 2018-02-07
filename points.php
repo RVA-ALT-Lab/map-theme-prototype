@@ -8,13 +8,20 @@ get_header(); ?>
                 <ul>
 
                 <?php
-                $args = array();
-                $point_query = new WP_Query(
-                    array(
+                if (isset(get_option('map_general_options')['hidden_work']) && !current_user_can('administrator') ){
+                    $args = array(
+                        'author' => get_current_user_id(),
                         'post_type' => 'map-point',
                         'posts_per_page' => -1
-                    )
-                );
+                    );
+                } else {
+                    $args = array(
+                        'post_type' => 'map-point',
+                        'posts_per_page' => -1
+                    );
+                }
+
+                $point_query = new WP_Query($args);
 
                 ?>
 

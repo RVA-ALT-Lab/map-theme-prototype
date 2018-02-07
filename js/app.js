@@ -1,5 +1,7 @@
 var MapUtilityClass = function ($) {
     var self = this;
+    this.currentUser = WPOPTIONS.currentuser;
+    this.themeOptions = WPOPTIONS.theme_options;
     this.siteURL = WPURLS.siteurl.replace('http', 'https');
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
@@ -46,16 +48,50 @@ var MapUtilityClass = function ($) {
     }
 
     this.getMapPoints = function ( ) {
+
+        if (self.themeOptions.hidden_work == '1'){
+
+            if (self.currentUser.roles.includes("administrator")){
+                //Here the admin gets all of the posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100';
+            } else if (self.currentUser.ID !== 0) {
+                //If there is a current user, we get their posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100&author=' + self.currentUser.ID
+            } else {
+                //If not a current user, we get all posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100'
+            }
+        } else {
+            var url = '/wp-json/wp/v2/map-point?_embed&per_page=100';
+        }
+
         return new Promise( (resolve, reject) => {
-            $.get( self.siteURL + '/wp-json/wp/v2/map-point?_embed&per_page=100')
+            $.get( self.siteURL + url)
             .done(data => resolve(data))
             .fail(error => reject(error))
         })
     }
 
     this.getMapPointsByCategory = function ( categoryID ) {
+
+        if (self.themeOptions.hidden_work == '1'){
+            if (self.currentUser.roles.includes("administrator")){
+                //Here the admin gets all of the posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID;
+            } else if (self.currentUser.ID !== 0) {
+                //If there is a current user, we get their posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100&author=' + self.currentUser.ID + '&map-point-category=' + categoryID;
+            } else {
+                //If not a current user, we get all posts
+                var url = '/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID;
+            }
+        } else {
+            var url = '/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID;
+        }
+
+
         return new Promise( (resolve, reject) => {
-            $.get(self.siteURL + '/wp-json/wp/v2/map-point?_embed&per_page=100&map-point-category=' + categoryID)
+            $.get(self.siteURL + url)
             .done(data => resolve(data))
             .fail(error => reject(error))
         })

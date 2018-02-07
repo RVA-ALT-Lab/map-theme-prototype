@@ -124,6 +124,7 @@ get_header(); ?>
                   </form>
                 <?php else: ?>
                 <p>You need to be logged in to submit a point to the map.</p>
+                <a href="<?php echo get_option('siteurl').'/wp-admin'?>">Click here to login</a>
                 <?php endif; ?>
 
 

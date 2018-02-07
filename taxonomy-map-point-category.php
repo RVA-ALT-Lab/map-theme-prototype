@@ -7,17 +7,45 @@ get_header(); ?>
         <input type="hidden" id="category-id" value="<?php get_queried_object()->term_id;?>">
                 <ul>
 
+                <?php if(isset(get_option('map_general_options')['hidden_work']) && !current_user_can('administrator') ): ?>
 
-                <?php if (have_posts()): ?>
-                    <?php while(have_posts()): the_post(); ?>
-                    <li class="point-tile">
-                        <h4><?php the_title(); ?></h4>
-                        <p><?php the_excerpt(); ?></p>
-                        <input type="hidden" class="category-id" value="<?php echo get_the_terms($post, 'map-point-category')[0]->term_id; ?>">
-                        <button type="button" class="btn btn-default zoom-button" data-id="<?php echo get_the_ID(); ?>"><i class="fa fa-search"></i></button>
-                        <a href="<?php echo get_the_permalink(); ?>" class="btn btn-primary">Read More</a>
-                    </li>
-                <?php endwhile;?>
+                <?php
+                    $args = array(
+                        'post_type' => 'map-point',
+                        'author' => get_current_user_id(),
+                        'tax_query' => array(
+                            'terms' => get_queried_object()->term_id
+                        )
+                    );
+                    $query = new WP_Query($args);
+                ?>
+                <?php if ($query->have_posts()): ?>
+                        <?php while($query->have_posts()): $query->the_post(); ?>
+                        <li class="point-tile">
+                            <h4><?php the_title(); ?></h4>
+                            <p><?php the_excerpt(); ?></p>
+                            <input type="hidden" class="category-id" value="<?php echo get_the_terms($post, 'map-point-category')[0]->term_id; ?>">
+                            <button type="button" class="btn btn-default zoom-button" data-id="<?php echo get_the_ID(); ?>"><i class="fa fa-search"></i></button>
+                            <a href="<?php echo get_the_permalink(); ?>" class="btn btn-primary">Read More</a>
+                        </li>
+                    <?php endwhile;?>
+                    <?php wp_reset_postdata();?>
+                    <?php endif;?>
+
+                <!-- Do Custom Query Here -->
+
+                <?php else: ?>
+                    <?php if (have_posts()): ?>
+                        <?php while(have_posts()): the_post(); ?>
+                        <li class="point-tile">
+                            <h4><?php the_title(); ?></h4>
+                            <p><?php the_excerpt(); ?></p>
+                            <input type="hidden" class="category-id" value="<?php echo get_the_terms($post, 'map-point-category')[0]->term_id; ?>">
+                            <button type="button" class="btn btn-default zoom-button" data-id="<?php echo get_the_ID(); ?>"><i class="fa fa-search"></i></button>
+                            <a href="<?php echo get_the_permalink(); ?>" class="btn btn-primary">Read More</a>
+                        </li>
+                    <?php endwhile;?>
+                    <?php endif;?>
                 <?php endif;?>
                 </ul>
 

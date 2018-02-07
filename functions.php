@@ -73,6 +73,9 @@ add_action('rest_api_init', function(){
     register_meta( $object_type, 'longitude', $latLngArgs );
 });
 
+// Collect Current User Info
+
+
 function map_tool_add_scripts () {
 
     wp_register_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css');
@@ -103,6 +106,11 @@ function map_tool_add_scripts () {
     if ( !is_front_page() ){
         wp_register_script('theme_js', get_template_directory_uri() . '/js/app.js', null, null, true );
         wp_localize_script('theme_js', 'WPURLS', array( 'siteurl' => get_option('siteurl') ));
+        wp_localize_script('theme_js', 'WPOPTIONS', array(
+            'currentuser' => wp_get_current_user(),
+            'theme_options' => get_option('map_general_options')
+
+        ));
         wp_enqueue_script('theme_js');
     }
 
@@ -259,31 +267,34 @@ function map_create_settings (){
     register_setting('map_general_options', 'map_general_options', 'map_validate_settings');
     add_settings_section( 'text_section', 'General Options', 'map_display_section', 'map-tool' );
     $field_args = array(
-        'type'      => 'text',
-        'id'        => 'pu_textbox',
-        'name'      => 'pu_textbox',
-        'desc'      => 'Example of textbox description',
+        'type'      => 'checkbox',
+        'id'        => 'hidden_work',
+        'name'      => 'hidden_work',
+        'desc'      => 'Check this box if you want to hide student submissions from one another. Administrators will always be able to see student work, but authors will not.',
         'std'       => '',
-        'label_for' => 'pu_textbox',
+        'label_for' => 'hidden_work',
         'class'     => 'css_class'
       );
 
-    add_settings_field( 'example_textbox', 'Example Textbox', 'map_display_setting', 'map-tool', 'text_section', $field_args );
+    add_settings_field( 'hidden_work', 'Hide Student Work', 'map_display_setting', 'map-tool', 'text_section', $field_args );
 }
 
 function map_validate_settings($input)
 {
-  foreach($input as $k => $v)
-  {
-    $newinput[$k] = trim($v);
 
-    // Check the input is a letter or a number
-    if(!preg_match('/^[A-Z0-9 _]*$/i', $v)) {
-      $newinput[$k] = '';
+    if (isset($input)){
+        foreach($input as $k => $v)
+        {
+            $newinput[$k] = trim($v);
+
+            // Check the input is a letter or a number
+            if(!preg_match('/^[A-Z0-9 _]*$/i', $v)) {
+            $newinput[$k] = '';
+            }
+        }
+
+        return $newinput;
     }
-  }
-
-  return $newinput;
 }
 
 function map_display_section($section){
@@ -303,6 +314,16 @@ function map_display_setting($args)
               $options[$id] = stripslashes($options[$id]);
               $options[$id] = esc_attr( $options[$id]);
               echo "<input class='regular-text$class' type='text' id='$id' name='" . $option_name . "[$id]' value='$options[$id]' />";
+              echo ($desc != '') ? "<br /><span class='description'>$desc</span>" : "";
+          case 'checkbox':
+             if (isset($options[$id])){
+              $options[$id] = stripslashes($options[$id]);
+              $options[$id] = esc_attr( $options[$id]);
+              $checked = checked('1', $options[$id], false);
+             } else {
+                 $checked = '';
+             }
+              echo "<input class='$class' type='checkbox' id='$id' name='" . $option_name . "[$id]' value='1'". $checked ."/>";
               echo ($desc != '') ? "<br /><span class='description'>$desc</span>" : "";
           break;
     }
