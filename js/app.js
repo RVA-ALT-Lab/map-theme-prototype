@@ -2,7 +2,7 @@ var MapUtilityClass = function ($) {
     var self = this;
     this.currentUser = WPOPTIONS.currentuser;
     this.themeOptions = WPOPTIONS.theme_options;
-    this.siteURL = WPURLS.siteurl.replace('http', 'https');
+    this.siteURL = WPURLS.siteurl;
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
         [-77.3858, 37.537],
@@ -109,9 +109,7 @@ var MapUtilityClass = function ($) {
     this.addMapMarkers = function (data, map) {
 
         data.forEach(point => {
-
             // todo: add in check for catgegory to determine color
-
             var backgroundColor = point['map-point-category'][0] * 2
             var markerHtmlStyles = `
             background-color: purple;

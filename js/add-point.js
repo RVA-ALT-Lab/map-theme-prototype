@@ -1,6 +1,6 @@
 var MapTool = new MapUtilityClass();
-
 var mymap = MapTool.initMap();
+var isGeolocating = true;
 
 L.polygon(MapTool.latlngs, { color: 'white', fillOpacity: .15 }).addTo(mymap);
 
@@ -11,9 +11,15 @@ var userPositionCircle = L.circle(
     ).addTo(mymap);
 
 function onLocationFound (e) {
-    latInput.value = e.latitude
-    longInput.value = e.longitude
-    userPositionCircle.setLatLng([e.latitude, e.longitude]);
+    if (!isGeolocating && e.type === 'click'){
+        latInput.value = e.latlng.lat
+        longInput.value = e.latlng.lng
+        userPositionCircle.setLatLng([e.latlng.lat, e.latlng.lng]);
+    } else if (e.type === 'locationfound') {
+        latInput.value = e.latitude
+        longInput.value = e.longitude
+        userPositionCircle.setLatLng([e.latitude, e.longitude]);
+    }
 }
 
 mymap.on('locationfound', onLocationFound);
@@ -32,6 +38,7 @@ var startGeolocationButton = document.querySelector('.start-geolocation');
 
 
 stopGeolocationButton.addEventListener('click', function () {
+    isGeolocating = false;
     userPositionCircle.setLatLng(['', ''])
     MapTool.stopGeolocation(mymap)
     startGeolocationButton.style.display = 'block';
@@ -39,7 +46,10 @@ stopGeolocationButton.addEventListener('click', function () {
 })
 
 startGeolocationButton.addEventListener('click', function () {
+    isGeolocating = true;
     MapTool.startGeolocation(mymap)
     startGeolocationButton.style.display = 'none';
     stopGeolocationButton.style.display = 'block';
 })
+
+mymap.on('click', onLocationFound)
