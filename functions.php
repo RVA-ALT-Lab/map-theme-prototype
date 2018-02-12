@@ -102,6 +102,9 @@ function map_tool_add_scripts () {
     wp_register_script('leaflet_js', 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js', null, null, true);
     wp_enqueue_script('leaflet_js');
 
+    wp_register_script('leaflet_heat_js', get_template_directory_uri() . '/js/leaflet-heat.js', null, null, true );
+    wp_enqueue_script('leaflet_heat_js');
+
     //Here we need to load some different scripts for different templates
     if ( !is_front_page() ){
         wp_register_script('theme_js', get_template_directory_uri() . '/js/app.js', null, null, true );

@@ -3,6 +3,7 @@ var MapUtilityClass = function ($) {
     this.currentUser = WPOPTIONS.currentuser;
     this.themeOptions = WPOPTIONS.theme_options;
     this.siteURL = WPURLS.siteurl;
+    this.currentPoints;
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
         [-77.3858, 37.537],
@@ -109,6 +110,11 @@ var MapUtilityClass = function ($) {
     this.addMapMarkers = function (data, map) {
 
         data.forEach(point => {
+
+            let featuredImage =
+                point._embedded['wp:featuredmedia'] ?
+                point._embedded['wp:featuredmedia'][0].source_url :
+                ''
             // todo: add in check for catgegory to determine color
             var backgroundColor = point['map-point-category'][0] * 2
             var markerHtmlStyles = `
@@ -137,7 +143,7 @@ var MapUtilityClass = function ($) {
 
             var markerContent = `
             <h4>${point.title.rendered}</h4>
-            <img src='${point._embedded['wp:featuredmedia'][0].source_url}' height='200' width='200'>
+            <img src='${featuredImage}' height='200' width='200'>
             <br>
             <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
             `
@@ -146,6 +152,11 @@ var MapUtilityClass = function ($) {
     }
 
     this.addSingleMapMarker = function (data, map) {
+
+                let featuredImage =
+                data._embedded['wp:featuredmedia'] ?
+                data._embedded['wp:featuredmedia'][0].source_url :
+                ''
 
                 // todo: add in check for catgegory to determine color
                 var markerHtmlStyles = `
@@ -173,13 +184,19 @@ var MapUtilityClass = function ($) {
                 }).addTo(map)
                 var markerContent = `
                 <h4>${data.title.rendered}</h4>
-                <img src='${data._embedded['wp:featuredmedia'][0].source_url}' height='200' width='200'>
+                <img src='${featuredImage}' height='200' width='200'>
                 <br>
                 <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
                 `
                 marker.bindPopup(markerContent)
             }
     this.createHeatMapLayer =  function (data, map){
+        let heatmapCoords = data.map( point => {
+
+            return {"lat" :point.meta.latitude, "lng": point.meta.longitude}
+        })
+        console.log(heatmapCoords)
+        L.heatLayer(heatmapCoords).addTo(map);
 
     }
 

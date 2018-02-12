@@ -10,4 +10,5 @@ var categoryID = document.querySelector('.category-id').value;
 MapTool.getMapPointsByCategory(categoryID)
 .then(data => {
     MapTool.addMapMarkers(data, mymap)
+    MapTool.createHeatMapLayer(data, mymap)
 })
