@@ -7,8 +7,13 @@ Template Name: Front Page
 <?php get_header(); ?>
 
             <div class="front-page">
-
-                <div id="front-page" style="">
+                <?php
+                    $featured_img_url = get_the_post_thumbnail_url();
+                    if(!$featured_img_url){
+                        $featured_img_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/VCU_East_on_Broad_by_Jeff_Auth.jpg/1200px-VCU_East_on_Broad_by_Jeff_Auth.jpg';
+                    }
+                ?>
+                <div id="front-page" style="background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(<?php echo $featured_img_url; ?>); background-size: cover;">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1><?php bloginfo('name'); ?></h1>
