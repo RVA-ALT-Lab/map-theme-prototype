@@ -52,8 +52,8 @@ body, html {
     display: inline-block;
     text-align: center;
     width: 100%;
-    min-height: 85px;
-    padding: 10px;
+    min-height: 65px;
+    padding: 5px 0 0 0;
 }
 
 .side-nav nav ul li:hover {
@@ -74,6 +74,10 @@ body, html {
 
 .side-nav nav ul li a:hover {
     text-decoration: none;
+}
+
+.side-nav nav ul li a p {
+    font-size: 14px;
 }
 
 .map,
