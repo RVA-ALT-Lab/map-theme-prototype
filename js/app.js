@@ -2,7 +2,7 @@ var MapUtilityClass = function ($) {
     var self = this;
     this.currentUser = WPOPTIONS.currentuser;
     this.themeOptions = WPOPTIONS.theme_options;
-    this.siteURL = WPURLS.siteurl.replace('http', 'http');
+    this.siteURL = WPURLS.siteurl.replace('http', 'https');
     this.currentPoints;
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
