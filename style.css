@@ -45,6 +45,7 @@ body, html {
 
 .side-nav nav ul hr {
     background-color: white;
+    margin: 0;
 }
 
 .side-nav nav ul li {

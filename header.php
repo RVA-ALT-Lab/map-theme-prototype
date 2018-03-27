@@ -39,17 +39,28 @@
                             </a>
                         </li>
                         <hr>
+                        <?php $color_array = array(
+                            '#E57200',
+                            '#FFCE00',
+                            '#00B3BE',
+                            '#8568BE',
+                            '#275E37'
+
+                        );
+                        $increment = 0;
+                        ?>
                         <?php $categories = get_terms(array('taxonomy' => 'map-point-category', 'hide_empty' => false)); ?>
                             <?php foreach($categories as $category): ?>
-                            <li>
+                            <li data-category="<?php echo $category->term_id; ?>" data-color="<?php echo isset($color_array[$increment]) ? $color_array[$increment] : 'purple'; ?>" >
                                 <?php
                                     $site_url = get_option('siteurl');
                                     $cat_link = $site_url . '/map-point-category/' . $category->slug;
                                 ?>
                                 <a href="<?php echo $cat_link; ?>">
-                                <i class="fa fa-3x fa-map-marker"></i>
+                                <i class="fa fa-2x fa-map-marker" style="color: <?php echo isset($color_array[$increment]) ? $color_array[$increment] : 'purple'; ?>;"></i>
                                 </br><?php echo $category->name; ?>
                             </a></li>
+                            <?php $increment++; ?>
                             <?php endforeach;?>
                     </ul>
                 </nav>

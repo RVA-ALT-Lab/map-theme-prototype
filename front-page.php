@@ -9,6 +9,7 @@ Template Name: Front Page
             <div class="front-page">
                 <?php
                     $featured_img_url = get_the_post_thumbnail_url();
+                    $caption = get_post(get_post_thumbnail_id())->post_excerpt;
                     if(!$featured_img_url){
                         $featured_img_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/VCU_East_on_Broad_by_Jeff_Auth.jpg/1200px-VCU_East_on_Broad_by_Jeff_Auth.jpg';
                     }
@@ -19,7 +20,7 @@ Template Name: Front Page
                             <h1><?php bloginfo('name'); ?></h1>
                             <p><?php  bloginfo('description');?></p>
                             <a class="btn btn-primary btn-lg" href="<?php echo get_site_url(). '/map'; ?>">Explore the Map</a>
-                            <p class="small">Image Credit to Jeff Auth from Wikipedia</p>
+                            <p class="small"><?php echo $caption; ?></p>
                         </div>
                     </div>
                 </div>

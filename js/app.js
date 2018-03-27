@@ -2,7 +2,7 @@ var MapUtilityClass = function ($) {
     var self = this;
     this.currentUser = WPOPTIONS.currentuser;
     this.themeOptions = WPOPTIONS.theme_options;
-    this.siteURL = WPURLS.siteurl.replace('http', 'https');
+    this.siteURL = WPURLS.siteurl.replace('http', 'http');
     this.currentPoints;
     this.richmondGeoJSON = [
         [-77.4734, 37.5972],
@@ -47,7 +47,11 @@ var MapUtilityClass = function ($) {
         }).addTo(mymap);
         return mymap;
     }
-
+    this.getMapPointColor = function (category){
+        dataCategory = `[data-category='${category}']`
+        let domElement = document.querySelector(dataCategory).getAttribute('data-color')
+        return domElement
+    }
     this.getMapPoints = function ( ) {
 
         if (self.themeOptions.hidden_work == '1'){
@@ -116,9 +120,10 @@ var MapUtilityClass = function ($) {
                 point._embedded['wp:featuredmedia'][0].source_url :
                 ''
             // todo: add in check for catgegory to determine color
-            var backgroundColor = point['map-point-category'][0] * 2
+            console.log(point['map-point-category'][0])
+            // var backgroundColor = point['map-point-category'][0] * 2
             var markerHtmlStyles = `
-            background-color: purple;
+            background-color: ${this.getMapPointColor(point['map-point-category'][0])};
             width: 3rem;
             height: 3rem;
             display: block;
