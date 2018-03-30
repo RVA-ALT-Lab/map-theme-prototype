@@ -4,6 +4,7 @@
 get_header(); ?>
     <h1>This is an</h1>
     <div class="point-list col-md-5">
+        <button class="btn btn-primary btn-block" id="toggleHeatmap">Activate Heatmap</button>
         <input type="hidden" id="category-id" value="<?php get_queried_object()->term_id;?>">
                 <ul>
 

@@ -5,6 +5,7 @@ Template Name: Points List
 
 get_header(); ?>
             <div class="point-list col-md-5">
+                <button class="btn btn-primary btn-block" id="toggleHeatmap">Activate Heatmap</button>
                 <ul>
 
                 <?php

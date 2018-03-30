@@ -19,7 +19,11 @@ var zoomButtonsArray = Array.from(zoomButtons);
 zoomButtonsArray.forEach(button => {
     button.addEventListener('click', function(event){
         var clickedPoint = mapPoints.filter(point => point.id == this.getAttribute('data-id'))[0]
-        console.log(clickedPoint)
         mymap.flyTo([clickedPoint.meta.latitude, clickedPoint.meta.longitude])
     })
+})
+
+var heatMapButton = document.querySelector('#toggleHeatmap')
+heatMapButton.addEventListener('click', function(){
+    MapTool.createHeatMapLayer(mapPoints, mymap)
 })

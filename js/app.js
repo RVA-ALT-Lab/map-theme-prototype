@@ -119,16 +119,14 @@ var MapUtilityClass = function ($) {
                 point._embedded['wp:featuredmedia'] ?
                 point._embedded['wp:featuredmedia'][0].source_url :
                 ''
-            // todo: add in check for catgegory to determine color
-            console.log(point['map-point-category'][0])
-            // var backgroundColor = point['map-point-category'][0] * 2
+
             var markerHtmlStyles = `
             background-color: ${this.getMapPointColor(point['map-point-category'][0])};
-            width: 3rem;
-            height: 3rem;
+            width: 2rem;
+            height: 2rem;
             display: block;
-            left: -1.5rem;
-            top: -1.5rem;
+            left: -1rem;
+            top: -1rem;
             position: relative;
             border-radius: 3rem 3rem 0;
             transform: rotate(45deg);
@@ -157,7 +155,6 @@ var MapUtilityClass = function ($) {
     }
 
     this.addSingleMapMarker = function (data, map) {
-
                 let featuredImage =
                 data._embedded['wp:featuredmedia'] ?
                 data._embedded['wp:featuredmedia'][0].source_url :
@@ -165,12 +162,12 @@ var MapUtilityClass = function ($) {
 
                 // todo: add in check for catgegory to determine color
                 var markerHtmlStyles = `
-                background-color: purple;
-                width: 3rem;
-                height: 3rem;
+                background-color: ${this.getMapPointColor(data['map-point-category'][0])};
+                width: 2rem;
+                height: 2rem;
                 display: block;
-                left: -1.5rem;
-                top: -1.5rem;
+                left: -1rem;
+                top: -1rem;
                 position: relative;
                 border-radius: 3rem 3rem 0;
                 transform: rotate(45deg);
@@ -197,10 +194,8 @@ var MapUtilityClass = function ($) {
             }
     this.createHeatMapLayer =  function (data, map){
         let heatmapCoords = data.map( point => {
-
             return {"lat" :point.meta.latitude, "lng": point.meta.longitude}
         })
-        console.log(heatmapCoords)
         L.heatLayer(heatmapCoords).addTo(map);
 
     }
