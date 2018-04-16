@@ -29,6 +29,8 @@ var MapUtilityClass = function ($) {
         lng: ''
     }
 
+    this.mapMarkers = []
+
     this.startGeolocation = function (map) {
         map.locate({ watch: true, enableHighAccuracy: true, setView: true, maxZoom: 16 });
     }
@@ -151,6 +153,7 @@ var MapUtilityClass = function ($) {
             <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
             `
             marker.bindPopup(markerContent)
+            self.mapMarkers.push(marker)
         })
     }
 
@@ -191,13 +194,21 @@ var MapUtilityClass = function ($) {
                 <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
                 `
                 marker.bindPopup(markerContent)
+                self.mapMarkers.push(marker)
             }
     this.createHeatMapLayer =  function (data, map){
         let heatmapCoords = data.map( point => {
             return {"lat" :point.meta.latitude, "lng": point.meta.longitude}
         })
-        L.heatLayer(heatmapCoords).addTo(map);
+        L.heatLayer(heatmapCoords).addTo(map)
+        self.removeMapMarkers(map)
 
+    }
+    this.removeMapMarkers = function (map) {
+        self.mapMarkers.forEach(marker => {
+            console.log(marker)
+            map.removeLayer(marker)
+        })
     }
 
 }
