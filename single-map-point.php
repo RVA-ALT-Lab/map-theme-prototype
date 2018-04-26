@@ -9,7 +9,7 @@ get_header(); ?>
                     <input type="hidden" class="post-id" value="<?php echo get_the_ID();?>">
                     <h1><?php the_title(); ?></h1>
                     <h2><?php the_author(); ?></h2>
-                    <?php $content = get_the_content(); echo $content; ?>
+                    <?php $content = the_content(); echo $content; ?>
                     <?php
 						// If comments are open or we have at least one comment, load up the comment template.
 						if ( comments_open() || get_comments_number() ) :
