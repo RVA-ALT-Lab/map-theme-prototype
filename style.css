@@ -95,6 +95,7 @@ body, html {
 }
 .map .full-page {
     background-color: #fff;
+    height: 100%;
 }
 .map .card {
     width: 50vw;
