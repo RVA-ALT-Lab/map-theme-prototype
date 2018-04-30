@@ -120,7 +120,7 @@ var MapUtilityClass = function ($) {
             let featuredImage =
                 point._embedded['wp:featuredmedia'] ?
                 point._embedded['wp:featuredmedia'][0].source_url :
-                ''
+                false
 
             var markerHtmlStyles = `
             background-color: ${this.getMapPointColor(point['map-point-category'][0])};
@@ -146,12 +146,20 @@ var MapUtilityClass = function ($) {
                 icon: icon
             }).addTo(map)
 
-            var markerContent = `
-            <h4>${point.title.rendered}</h4>
-            <img src='${featuredImage}' height='200' width='200'>
-            <br>
-            <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
-            `
+            if (featuredImage) {
+                var markerContent = `
+                <h4>${point.title.rendered}</h4>
+                <img src='${featuredImage}' height='200' width='200'>
+                <br>
+                <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                `
+            } else {
+                var markerContent = `
+                <h4>${point.title.rendered}</h4>
+                <br>
+                <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                `
+            }
             marker.bindPopup(markerContent)
             self.mapMarkers.push(marker)
         })
@@ -161,7 +169,7 @@ var MapUtilityClass = function ($) {
                 let featuredImage =
                 data._embedded['wp:featuredmedia'] ?
                 data._embedded['wp:featuredmedia'][0].source_url :
-                ''
+                false
 
                 // todo: add in check for catgegory to determine color
                 var markerHtmlStyles = `
@@ -187,12 +195,22 @@ var MapUtilityClass = function ($) {
                 var marker = L.marker([data.meta.latitude, data.meta.longitude], {
                     icon: icon
                 }).addTo(map)
-                var markerContent = `
-                <h4>${data.title.rendered}</h4>
-                <img src='${featuredImage}' height='200' width='200'>
-                <br>
-                <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
-                `
+
+                if (featuredImage) {
+                    var markerContent = `
+                    <h4>${point.title.rendered}</h4>
+                    <img src='${featuredImage}' height='200' width='200'>
+                    <br>
+                    <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                    `
+                } else {
+                    var markerContent = `
+                    <h4>${point.title.rendered}</h4>
+                    <br>
+                    <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                    `
+                }
+
                 marker.bindPopup(markerContent)
                 self.mapMarkers.push(marker)
             }
