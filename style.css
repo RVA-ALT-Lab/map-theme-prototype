@@ -93,7 +93,9 @@ body, html {
     height: 100vh;
     width: calc(100vw - 85px);
 }
-
+.map .full-page {
+    background-color: #fff;
+}
 .map .card {
     width: 50vw;
     z-index: 10000;
