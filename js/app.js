@@ -198,16 +198,16 @@ var MapUtilityClass = function ($) {
 
                 if (featuredImage) {
                     var markerContent = `
-                    <h4>${point.title.rendered}</h4>
+                    <h4>${data.title.rendered}</h4>
                     <img src='${featuredImage}' height='200' width='200'>
                     <br>
-                    <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                    <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
                     `
                 } else {
                     var markerContent = `
-                    <h4>${point.title.rendered}</h4>
+                    <h4>${data.title.rendered}</h4>
                     <br>
-                    <a class='btn btn-primary btn-block' href='${point.link}'>Read More</a>
+                    <a class='btn btn-primary btn-block' href='${data.link}'>Read More</a>
                     `
                 }
 
