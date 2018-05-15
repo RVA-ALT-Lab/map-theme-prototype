@@ -231,3 +231,21 @@ li a .fa-map-marker {
 .small {
     font-size: .75rem!important;
 }
+
+/*leaflet tweaks*/
+
+.leaflet-popup-content img {
+    margin-bottom: .3em;
+}
+
+.btn-primary {
+    background-color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #efefef;
+}
+
+.leaflet-container a {
+    color: #007bff !important;
+}
