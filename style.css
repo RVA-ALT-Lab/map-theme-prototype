@@ -236,6 +236,9 @@ li a .fa-map-marker {
 
 .leaflet-popup-content img {
     margin-bottom: .3em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-primary {
@@ -248,4 +251,8 @@ li a .fa-map-marker {
 
 .leaflet-container a {
     color: #007bff !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 6px !important;
 }
