@@ -241,11 +241,11 @@ li a .fa-map-marker {
     margin-right: auto;
 }
 
-.btn-primary {
+.leaflet-popup-content .btn-primary {
     background-color: #fff;
 }
 
-.btn-primary:hover {
+.leaflet-popup-content .btn-primary:hover {
     background-color: #efefef;
 }
 
