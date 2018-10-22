@@ -5,7 +5,13 @@ get_header(); ?>
     <h1>This is an</h1>
     <div class="point-list col-md-5">
         <button class="btn btn-primary btn-block" id="toggleHeatmap">Activate Heatmap</button>
-        <?php $the_cat_id = get_queried_object()->term_id;?>
+        <?php
+
+        $queried_object = get_queried_object();
+        $the_cat_id = $queried_object->term_id;
+
+
+        ?>
         <input type="hidden" id="category-id" value="<?php echo $the_cat_id;?>">
                 <ul>
 
@@ -13,10 +19,14 @@ get_header(); ?>
 
                 <?php
                     $args = array(
+                    	'posts_per_page' => -1,
                         'post_type' => 'map-point',
                         'author' => get_current_user_id(),
                         'tax_query' => array(
-                            'terms' => $the_cat_id
+                        	array(
+                        		'taxonomy' => 'map-point-category',
+                        		'terms' => $the_cat_id
+                        	)
                         )
                     );
                     $query = new WP_Query($args);
@@ -39,23 +49,27 @@ get_header(); ?>
                 <?php else: ?>
                     <?php
                         $args = array(
+                        	'posts_per_page' => -1,
                             'post_type' => 'map-point',
                             'tax_query' => array(
-                                'terms' => $the_cat_id
-                            )
+	                        	array(
+	                        		'taxonomy' => 'map-point-category',
+	                        		'terms' => $the_cat_id
+	                        	)
+	                        )
                         );
                         $query = new WP_Query($args);
                     ?>
                     <?php if (have_posts()): ?>
                         <?php while(have_posts()): the_post(); ?>
-                        <li class="point-tile">
-                            <h4><?php the_title(); ?></h4>
-                            <p><?php the_excerpt(); ?></p>
-                            <input type="hidden" class="category-id" value="<?php echo get_the_terms($post, 'map-point-category')[0]->term_id; ?>">
-                            <button type="button" class="btn btn-default zoom-button" data-id="<?php echo get_the_ID(); ?>"><i class="fa fa-search"></i></button>
-                            <a href="<?php echo get_the_permalink(); ?>" class="btn btn-primary">Read More</a>
-                        </li>
-                    <?php endwhile;?>
+	                        <li class="point-tile">
+	                            <h4><?php the_title(); ?></h4>
+	                            <p><?php the_excerpt(); ?></p>
+	                            <input type="hidden" class="category-id" value="<?php echo get_the_terms($post, 'map-point-category')[0]->term_id; ?>">
+	                            <button type="button" class="btn btn-default zoom-button" data-id="<?php echo get_the_ID(); ?>"><i class="fa fa-search"></i></button>
+	                            <a href="<?php echo get_the_permalink(); ?>" class="btn btn-primary">Read More</a>
+	                        </li>
+                    	<?php endwhile;?>
                     <?php endif;?>
                 <?php endif;?>
                 </ul>

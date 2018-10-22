@@ -50,9 +50,13 @@ var MapUtilityClass = function ($) {
         return mymap;
     }
     this.getMapPointColor = function (category){
-        dataCategory = `[data-category='${category}']`
-        let domElement = document.querySelector(dataCategory).getAttribute('data-color')
-        return domElement
+        if (category) {
+            dataCategory = `[data-category='${category}']`
+            let domElement = document.querySelector(dataCategory).getAttribute('data-color')
+            return domElement
+        } else {
+            return '#FF5733'
+        }
     }
     this.getMapPoints = function ( ) {
 
@@ -122,8 +126,13 @@ var MapUtilityClass = function ($) {
                 point._embedded['wp:featuredmedia'][0].source_url :
                 false
 
+            let mapPointCategory =
+                point['map-point-category'][0]
+                ? point['map-point-category'][0]
+                : null
+
             var markerHtmlStyles = `
-            background-color: ${this.getMapPointColor(point['map-point-category'][0])};
+            background-color: ${this.getMapPointColor(mapPointCategory)};
             width: 2rem;
             height: 2rem;
             display: block;
