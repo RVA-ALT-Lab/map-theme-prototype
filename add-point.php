@@ -85,7 +85,7 @@ get_header(); ?>
                 <div class="modal-body">
 
                 <?php if(is_user_logged_in()): ?>
-                    <p>Enter some details about the point you want to capture. All of this info is optional, and you can edit it on the backend later. The logitude and latitude of your current position will be automatically logged when you click submit.</p>
+                    <p>Enter some details about the point you want to capture. All of this info is optional, and you can edit it on the backend later. The longitude and latitude of your current position will be automatically logged when you click submit.</p>
 
                   <form action="" enctype="multipart/form-data" method="POST">
                     <?php wp_nonce_field('submit_map_point', 'map_point_nonce_field'); ?>
